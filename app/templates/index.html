@@ -1,0 +1,33 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommendation System</title>
+</head>
+<body>
+    <h1>Movie Recommendation System</h1>
+    <form method="post">
+        <label for="movie">Choose a movie:</label>
+        <select name="movie">
+            {% for title in movie_titles %}
+                <option value="{{ title }}" {% if title == selected_title %}selected{% endif %}>{{ title }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="method">Select method:</label>
+        <input type="radio" name="method" value="content" {% if method == "content" %}checked{% endif %}> Content-Based
+        <input type="radio" name="method" value="collaborative" {% if method == "collaborative" %}checked{% endif %}> Collaborative<br><br>
+
+        <input type="submit" value="Recommend">
+    </form>
+
+    {% if recommendations %}
+        <h2>Recommendations:</h2>
+        <ul>
+            {% for rec in recommendations %}
+                <li>{{ rec }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
